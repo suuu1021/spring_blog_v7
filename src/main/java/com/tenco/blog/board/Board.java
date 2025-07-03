@@ -41,6 +41,11 @@ public class Board {
     @CreationTimestamp
     private Timestamp createdAt;
 
+    // 테이블에 필드 만들지 마 !
+    // (현재 로그인한 유저와 게시글 작성자 여부를 판단 함)
+    @Transient
+    private boolean isBoardOwner;
+
     // 게시글에 소유자를 직접 확인하는 기능을 만들자
     public boolean isOwner(Long checkUserId) {
         return this.user.getId().equals(checkUserId);
@@ -69,6 +74,8 @@ public class Board {
     @OrderBy("id DESC") // 정렬 옵션 설정
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "board", cascade = CascadeType.REMOVE)
     List<Reply> replies = new ArrayList<>(); // List 선언과 동시에 초기화
+
+
 
 }
 
