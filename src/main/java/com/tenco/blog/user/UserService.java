@@ -1,6 +1,7 @@
 package com.tenco.blog.user;
 
 import com.tenco.blog._core.errors.exception.Exception400;
+import com.tenco.blog._core.errors.exception.Exception403;
 import com.tenco.blog._core.errors.exception.Exception404;
 import lombok.RequiredArgsConstructor;
 
@@ -81,5 +82,19 @@ public class UserService {
 
         // 3. 응답 DTO 반환
         return new UserResponse.UpdateDTO(selectedUser);
+    }
+
+    public UserResponse.DetailDTO findUserById(Long id, User sessionUser) {
+
+        // 권한 확인
+        if(!sessionUser.getId().equals(id)) {
+            throw new Exception403("본인 정보만 조회 가능합니다");
+        }
+        // 정보 조회
+        User selectedUser = userJpaRepository.findById(id).orElseThrow(() -> {
+           throw new Exception404("사용자를 찾을 수 없습니다");
+        });
+        // 응답 DTO 변환 처리
+        return new UserResponse.DetailDTO(selectedUser);
     }
 }
