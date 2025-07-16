@@ -40,7 +40,6 @@ public class User {
     }
 
     public void update(UserRequest.UpdateDTO updateDTO) {
-        updateDTO.validate();
 
         // 영속 상태 엔티티의 필드값을 변경
         this.password = updateDTO.getPassword();
@@ -51,8 +50,5 @@ public class User {
         // 2. 필드값 변환 시 현재 상테와 스냅샷 상태를 비교
         // 3. 트랜잭션 커밋이 되면 변경된 필드만 UPDATE 쿼리 자동 생성
         // 4. 반영 처리
-
-
-
     }
 }
