@@ -1,6 +1,5 @@
 package com.tenco.blog.reply;
 
-
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,6 +22,5 @@ public class ReplyResponse {
             this.boardId = reply.getBoard().getId();
         }
     }
-
 
 }

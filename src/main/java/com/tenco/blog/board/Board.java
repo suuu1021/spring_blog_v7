@@ -1,9 +1,9 @@
 package com.tenco.blog.board;
 
 
+import com.tenco.blog._core.utils.MyDateUtil;
 import com.tenco.blog.reply.Reply;
 import com.tenco.blog.user.User;
-import com.tenco.blog._core.utils.MyDateUtil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,9 +29,6 @@ public class Board {
 
     private String title;
     private String content;
-    // V2에서 사용했던 방식
-    // private String username;
-    // V3 에서 Board 엔티티는 User 엔티티와 연관관계가 성립이 된다
 
     // 다대일
     @ManyToOne(fetch = FetchType.LAZY)
@@ -83,6 +80,9 @@ public class Board {
         // 물리적인 저장 장치인 DB에 commit 반영함
     }
 
+    public String getWriterName() {
+        return this.getUser().getUsername();
+    }
 
 }
 
